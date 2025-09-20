@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function acceptName(str)
+        {
+            let flag=true;
+            for(var i=0;i<str.length;i++){
+
+                let ch=str.charCodeAt(i);
+                if(!((ch>=65 && ch<=90) || (ch>=97 && ch<=122)|| ch==32 )){
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag)
+            {
+                let spanEle=document.getElementById("s");
+                spanEle.style.color="white";
+                spanEle.innerHTML="";
+
+            }
+            else
+            {
+                let spanEle=document.getElementById("s");
+                spanEle.style.color="red";
+                spanEle.innerHTML="Invalid Name";
+
+            }
+        }
+
+
+
+        function emailValidate(str) {
+            let spanEle = document.getElementById("m");
+            
+            // Check exactly one '@' and not at the beginning
+            let atIndex = str.indexOf("@");
+            let lastAtIndex = str.lastIndexOf("@");
+            if (atIndex <= 0 || atIndex !== lastAtIndex) {
+                spanEle.innerHTML = "Invalid email";
+                spanEle.style.color = "red";
+                return;
+            }
+        
+            // Check dot after '@' and valid position
+            let domainPart = str.substring(atIndex + 1);
+            let dotIndex = domainPart.indexOf(".");
+            if (dotIndex === -1 || (dotIndex !== domainPart.length - 3 && dotIndex !== domainPart.length - 4)) {
+                spanEle.innerHTML = "Invalid email";
+                spanEle.style.color = "red";
+                return;
+            }
+        
+            // Check for valid characters only
+            let validChars = /^[A-Za-z0-9@._]+$/;
+            if (!validChars.test(str)) {
+                spanEle.innerHTML = "Invalid email";
+                spanEle.style.color = "red";
+                return;
+            }
+        
+            // ✅ All checks passed
+            spanEle.innerHTML = "";
+        }       
+
+
+        function cotactValidation(str)
+        {
+            if(str.length!=10){
+               document.getElementById("c").innerHTML="Invalid Number";
+                document.getElementById("c").style.color="red";
+            }
+            else{
+               document.getElementById("c").innerHTML="";
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <%-include('nav.ejs')%>
+   
+    <div class="container d-flex justify-content-center">
+        <div class="card mt-5" style="width: 28rem;">
+        
+            <div class="card-body p-4 bg-light">
+            <h4 class="mt-2 text-center">Add New Student</h4>
+    <form action="/addstud" method="post">
+           
+            <input type="text" name="sname" id="" class="form-control mt-4" placeholder="Enter Name " required onkeyup="acceptName(this.value)"/>
+            <span id="s"></span>
+
+            <input type="text" name="email" id="" class="form-control mt-4" placeholder="Enter Email " required onkeyup="emailValidate(this.value)">
+            <span id="m"></span>
+
+            <input type="text" name="contact" id="" class="form-control mt-4" placeholder="Enter Contact " required onkeyup="cotactValidation(this.value)">
+            <span id="c"></span>
+
+            
+            <select class="form-control mt-4" name="cid" id="" size="1" required>
+                 <option value="" disabled selected>Choose Course</option>
+
+                  <%course.forEach(course=>{%>
+                
+                    <option value="<%=course.cid%>"><%=course.cname%></option>
+                <% })%>
+                
+            </select>
+
+            <input type="submit" name="" id="" class="btn form-control mt-4 btn-outline-primary" value="Add Student">
+            
+            </form>
+            </div>
+          </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="ajaxtest.js">
+    </script>
+</head>
+<body>
+    <%- include('nav.ejs')%>
+
+    <div class="container ">
+        <input type="text" name="" id="" class="form-control mt-4 " placeholder="Search....." onkeyup="ajaxImpl(this.value)">
+
+    <table class="table table-striped mt-4  ">
+        <thead class="text-center">
+            <tr >
+                <th>SrNo</th>
+                <th>Name</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+           
+        </thead>
+        <tbody class="text-center" id="tblBody">
+            <%
+            if(data.length==0){
+            %>
+
+            <tr><td colspan="4"><h1>There is no data present in table</h1></td></tr>
+            <%
+            }
+            else{
+                data.forEach((item,index)=>{
+
+            %>  
+             <tr >
+                <td><%=(index+1)%></td>
+                <td><%=item.cname%></td>
+                <td><a href="/delById?cid=<%=item.cid%>"   onclick="return confirm ('Are you shoure to delete')"><i class="text-danger fa-solid fa-trash" ></i></a></td>
+
+                <td><a href="/update?cid=<%=item.cid%>" ><i class="text-success  fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+            </tr>
+
+            
+            <%
+                })
+            }
+            %>
+              
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

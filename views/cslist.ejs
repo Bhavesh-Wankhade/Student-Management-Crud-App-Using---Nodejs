@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="ajaxtest.js"></script>
+</head>
+<body>
+    <%- include('nav.ejs')%>
+    <div class="container">
+
+        <!-- ✅ Wrap the select inside a form -->
+        <form method="GET" action="">
+            <select class="form-control mt-4" name="cid" onchange="this.form.submit()">
+                <option value="" disabled <%= !selectedCid ? 'selected' : "" %>>Choose Course</option>
+
+                <% courselist.forEach(course => { %>
+                    <option value="<%= course.cid %>" <%= selectedCid == course.cid ? 'selected' : '' %>>
+                        <%= course.cname %>
+                    </option>
+                <% }) %>
+            </select>
+        </form>
+
+        <table class="table table-striped mt-4">
+            <thead class="text-center">
+                <tr>
+                    <th>SrNo</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Course Name</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <% if (studata.length === 0) { %>
+                    <tr>
+                        <td colspan="5">No students found for the selected course.</td>
+                    </tr>
+                <% } else { %>
+                    <% studata.forEach((student, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= student.sname %></td>
+                            <td><%= student.email %></td>
+                            <td><%= student.contact %></td>
+                            <td><%= student.cname %></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

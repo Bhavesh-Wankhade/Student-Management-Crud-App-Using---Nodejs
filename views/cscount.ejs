@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+   <%- include('nav.ejs')%> 
+   <div class="container">
+    <table class="table table-striped mt-4 ">
+        <thead class="text-center">
+            <th>SrNo</th>
+            <th>Course Name</th>
+            <th>No Of Student</th>
+        </thead>
+
+        <tbody class="text-center">
+            <%
+                cscount.forEach((item,index)=>{
+            
+            %>
+                <tr>
+                    <td><%=(index+1)%></td>
+                    <td><%=item.cname%></td>
+                    <td><%=item.student_count%></td>
+                </tr>
+            <%
+                })
+
+            %>
+            
+            
+            
+            
+        </tbody>
+    </table>
+   </div>
+</body>
+</html>

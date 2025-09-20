@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('nav.ejs')%>
+    <div class="container d-flex justify-content-center">
+        <div class="card mt-5" style="width: 28rem;">
+        
+            <div class="card-body p-4 bg-light">
+            <h4 class="mt-2 text-center">
+                Update Student</h4>
+
+        <form action="/fupdate" method="post">
+
+             <input type="text" name="sid" id="" class="form-control mt-4" value="<%=studdata[0].sid%>" readonly>
+
+            <input type="text" name="sname" id="" class="form-control mt-4" value="<%=studdata[0].sname%>" >
+
+            <input type="text" name="email" id="" class="form-control mt-4" value="<%=studdata[0].email%>" >
+
+            <input type="text" name="contact" id="" class="form-control mt-4" value="<%=studdata[0].contact%>">
+
+            <input type="text" name="cname" id="" class="form-control mt-4" value="<%=studdata[0].cname%>" readonly>
+
+
+            <input type="submit" name="" id="" class="btn form-control mt-4 btn-outline-primary" value="Add Student">
+
+            </form>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
